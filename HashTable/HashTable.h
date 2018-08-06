@@ -38,9 +38,7 @@ public:
 		Item<key_t, value_t>* _iter = _list.Begin();
 		while (_iter) 
 		{
-			insertItem( _iter->getKey(), 
-				        _iter->getValue() );
-
+			insertItem( _iter->getKey(), _iter->getValue());
 			_iter = _iter->getNext();
 		}
 	}
@@ -48,10 +46,12 @@ public:
 	bool removeItem(const key_t& _key)
 	{
 		const unsigned int hashIndex = equalBucket(_key);
-		if (hashIndex == -1) {
+		if (hashIndex == -1) 
+		{
 			return false;
 		}
-		else {
+		else 
+		{
 			return m_map[hashIndex].removeItem(_key);
 		}
 	}
@@ -59,23 +59,27 @@ public:
 	value_t searchItem(const key_t& _key)
 	{
 		const unsigned int hashIndex = equalBucket(_key);
-		if (hashIndex == -1) {
+		if (hashIndex == -1) 
+		{
 			return -1;
-		} else {
+		} else 
+		{
 			return m_map[hashIndex].searchItem(_key);
 		}
 	}
 
 	void clearTable()
 	{
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) 
+		{
 			m_map[i].clearList();
 		}
 	}
 
 	void printTable()
 	{
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) 
+		{
 			m_map[i].printList();
 		}
 	}
@@ -102,7 +106,8 @@ private:
 				hashIndex += step;
 				hashIndex = hashIndex % size;
 
-				if (m_map[hashIndex].empty()) {
+				if (m_map[hashIndex].empty()) 
+				{
 					return hashIndex;
 				}
 			}
@@ -127,7 +132,8 @@ private:
 				hashIndex += step;
 				hashIndex = hashIndex % size;
 
-				if (m_map[hashIndex].searchItem(_key) != -1) {
+				if (m_map[hashIndex].searchItem(_key) != -1) 
+				{
 					return hashIndex;
 				}
 			}
@@ -141,7 +147,8 @@ private:
 		LinkedList<key_t, value_t>* t_map 
 			= new LinkedList<key_t, value_t>[size];
 
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) 
+		{
 			t_map[i] = m_map[i];
 		}
 
@@ -149,7 +156,8 @@ private:
 		size = size * 2;
 		m_map = new LinkedList<key_t, value_t>[size];
 
-		for (int i = 0; i < size / 2; i++) {
+		for (int i = 0; i < size / 2; i++) 
+		{
 			insertList( t_map[i] );
 		}
 
